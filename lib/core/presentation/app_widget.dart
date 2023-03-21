@@ -23,34 +23,58 @@ class AppWidget extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("TaskyTrack"),
-        backgroundColor: Colors.green,
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: Container(
+        color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
+            const Text(
+              "TaskyTrack",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 40,
+              ),
+            ),
             Container(
               margin:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
               decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 205, 229, 215),
+                  // color: Color.fromARGB(255, 205, 229, 215),
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Column(
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextFormField(
-                      controller: inputFormController,
-                      keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        labelText: "Task name",
+                    child: Flexible(
+                      child: TextFormField(
+                        controller: inputFormController,
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.done,
+                        cursorColor: const Color.fromARGB(255, 38, 187, 11),
+                        maxLength: 30,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                        decoration: const InputDecoration(
+                          labelText: "Task name",
+                          labelStyle: TextStyle(color: Colors.grey),
+                          focusColor: Color.fromARGB(255, 38, 187, 11),
+                          hoverColor: Color.fromARGB(255, 38, 187, 11),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none
+                          ),
+                        ),
+                        onChanged: (newValue) {
+                          ref
+                              .read(taskNameProvider.notifier)
+                              .setTaskName(newValue);
+                        },
                       ),
-                      onChanged: (newValue) {
-                        ref
-                            .read(taskNameProvider.notifier)
-                            .setTaskName(newValue);
-                      },
                     ),
                   ),
                   Container(
@@ -84,7 +108,7 @@ class AppWidget extends ConsumerWidget {
                       style: const ButtonStyle(
                         padding: MaterialStatePropertyAll(
                             EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
-                        backgroundColor: MaterialStatePropertyAll(Colors.green),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 38, 187, 11)),
                       ),
                       child: const Text(
                         "ADD",
@@ -98,7 +122,13 @@ class AppWidget extends ConsumerWidget {
                 ],
               ),
             ),
-            const TasksListView(),
+            Flexible(
+              fit: FlexFit.tight,
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: const TasksListView()
+              )
+            ),
           ],
         ),
       ),

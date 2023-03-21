@@ -26,14 +26,14 @@ class TaskView extends ConsumerWidget {
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.green,
+          color: Color.fromARGB(255, 38, 187, 11),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Checkbox(
                 value: task.completed,
-                checkColor: Colors.green,
+                checkColor: const Color.fromARGB(255, 38, 187, 11),
                 activeColor: Colors.white,
                 side: MaterialStateBorderSide.resolveWith((states) =>
                     const BorderSide(width: 2.0, color: Colors.white)),

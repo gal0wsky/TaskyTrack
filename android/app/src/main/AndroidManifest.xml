@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tasky_track">
    <application
-        android:label="tasky_track"
+        android:label="TaskyTrack"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
