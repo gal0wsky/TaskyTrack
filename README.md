@@ -1,18 +1,12 @@
 # tasky_track
 
-Simple task tracking app built with Flutter
+Yet another simple task tracking app built with Flutter
 
-<!-- A new Flutter project.
+## Intuitive:
+![Intuitive](https://github.com/gal0wsky/readme-images-store/blob/main/TaskyTrack/TaskyTrack-empty-view.png?raw=true)
 
-## Getting Started
+## Simple UI:
+![Simple UI](https://github.com/gal0wsky/readme-images-store/blob/main/TaskyTrack/TaskyTrack-items-on-list.png?raw=true)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference. -->
+## Easy to use:
+![Easy to use](https://github.com/gal0wsky/readme-images-store/blob/main/TaskyTrack/TaskyTrack-task-done.png?raw=true)
