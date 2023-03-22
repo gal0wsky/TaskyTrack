@@ -40,11 +40,15 @@ class TaskView extends ConsumerWidget {
                 onChanged: (_) {
                   ref.read(taskProvider.notifier).changeTaskStatus(task);
                   // TODO: task title is crossed
-                  // labelStyle = taskComplitedStyle;
                 }),
-            Text(
-              task.title,
-              style: labelStyle,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  task.title,
+                  style: labelStyle,
+                ),
+              ),
             ),
           ],
         ),

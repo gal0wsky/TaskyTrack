@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tasky_track/tasks/presentation/task_view.dart';
+import 'package:tasky_track/tasks/widgets/task_view.dart';
 import '../core/presentation/providers.dart';
 
 class TasksListView extends ConsumerWidget {
