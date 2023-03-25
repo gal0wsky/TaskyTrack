@@ -27,10 +27,10 @@ class TaskState with _$TaskState {
 }
 
 class TaskStateNotifier extends StateNotifier<List<TaskState>> {
-  TaskStateNotifier() : super(const []);
+  final String key;
+  final FlutterSecureStorage storage;
 
-  static const String _key = "tasksList";
-  static const FlutterSecureStorage _storage = FlutterSecureStorage();
+  TaskStateNotifier({required this.key, required this.storage}) : super(const []);
 
   Future<bool> addNewTask({required String title}) async {
     final isInList = state.where((t) => t.title == title);
@@ -66,12 +66,12 @@ class TaskStateNotifier extends StateNotifier<List<TaskState>> {
   }
 
   void reorganizeAfterDrag({required int oldIndex, required int newIndex}) {
+    final oldIndexItem = state[oldIndex];
+    final newIndexItem = state[newIndex];
+
     if (newIndex > oldIndex) {
       newIndex--;
     }
-    
-    final oldIndexItem = state[oldIndex];
-    final newIndexItem = state[newIndex];
 
     state = [
       for (final task in state)
@@ -86,13 +86,13 @@ class TaskStateNotifier extends StateNotifier<List<TaskState>> {
 
   Future<void> saveTasksOnDeviceAsync() async {
     await deleteTasksFromStorageAsync();
-    final jsonList = stateToJson();
-    final tasksJson = json.encode(jsonList);
-    await _storage.write(key: _key, value: tasksJson);
+    final tasksJson = stateToJson();
+    
+    await storage.write(key: key, value: tasksJson);
   }
 
   Future<void> loadTasksFromStorageAsync() async {
-    final tasksJson = await _storage.read(key: _key);
+    final tasksJson = await storage.read(key: key);
 
     if (tasksJson != null) {
       final tasks = json.decode(tasksJson);
@@ -104,12 +104,14 @@ class TaskStateNotifier extends StateNotifier<List<TaskState>> {
   }
 
   Future<void> deleteTasksFromStorageAsync() async {
-    await _storage.delete(key: _key);
+    await storage.delete(key: key);
   }
 
-  List stateToJson() {
+  String stateToJson() {
     List jsonList = [];
     state.map((task) => jsonList.add(task.toJson())).toList();
-    return jsonList;
+
+    final tasksJson = json.encode(jsonList);
+    return tasksJson;
   }
 }
