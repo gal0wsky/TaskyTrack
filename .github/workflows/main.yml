@@ -23,7 +23,6 @@ jobs:
         with:
           flutter-version: '3.7.8'
       - run: flutter clean
-      - run: flutter pub cache clean
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk --debug --split-per-abi
