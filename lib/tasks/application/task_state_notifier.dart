@@ -32,7 +32,7 @@ class TaskStateNotifier extends StateNotifier<List<TaskState>> {
   static const String _key = "tasksList";
   static const FlutterSecureStorage _storage = FlutterSecureStorage();
 
-  Future<bool> addNewTask(String title) async {
+  Future<bool> addNewTask({required String title}) async {
     final isInList = state.where((t) => t.title == title);
 
     if (isInList.isNotEmpty || title.isEmpty) {
@@ -44,11 +44,11 @@ class TaskStateNotifier extends StateNotifier<List<TaskState>> {
     }
   }
 
-  Future<void> changeTaskStatus(TaskState taskToModify) async {
+  Future<void> changeTaskStatus({required TaskState task}) async {
     state = [
-      for (final task in state)
-        if (task.title != taskToModify.title)
-          task
+      for (final item in state)
+        if (item.title != task.title)
+          item
         else
           TaskState(title: task.title, completed: !task.completed!)
     ];
@@ -63,6 +63,25 @@ class TaskStateNotifier extends StateNotifier<List<TaskState>> {
     ];
 
     await saveTasksOnDeviceAsync();
+  }
+
+  void reorganizeAfterDrag({required int oldIndex, required int newIndex}) {
+    if (newIndex > oldIndex) {
+      newIndex--;
+    }
+    
+    final oldIndexItem = state[oldIndex];
+    final newIndexItem = state[newIndex];
+
+    state = [
+      for (final task in state)
+        if (task.title == oldIndexItem.title)
+          newIndexItem
+        else if (task.title == newIndexItem.title)
+          oldIndexItem
+        else
+          task
+    ];
   }
 
   Future<void> saveTasksOnDeviceAsync() async {

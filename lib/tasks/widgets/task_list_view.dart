@@ -10,19 +10,20 @@ class TasksListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tasks = ref.watch(taskProvider);
+    final tasks = ref.watch(tasksProvider);
 
-    return ListView.builder(
-      shrinkWrap: true,
+    return ReorderableListView.builder(
       itemCount: tasks.length,
+      scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         return Dismissible(
-            key: Key(tasks[index].title),
-            onDismissed: (direction) {
-              ref.read(taskProvider.notifier).deleteTask(tasks[index]);
-            },
-            child: TaskView(task: tasks[index]));
+          key: Key(tasks[index].title),
+          child: TaskView(task: tasks[index]),
+        );
       },
+      onReorder: ((oldIndex, newIndex) {
+        ref.read(tasksProvider.notifier).reorganizeAfterDrag(oldIndex: oldIndex, newIndex: newIndex);
+      })
     );
   }
 }
