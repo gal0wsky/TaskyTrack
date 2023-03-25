@@ -1,16 +1,14 @@
 on:
   pull_request:
     branches:
-      - main
-      - master
+      - releases
   push:
     branches:
-      - main
-      - master
-name: "Build & Release"
+      - releases
+name: "Build & Release Apk"
 jobs:
   build:
-    name: Build & Release
+    name: Build & Release Apk
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
@@ -23,7 +21,7 @@ jobs:
       - run: flutter clean
       - run: flutter pub get
       - run: flutter test
-      - run: flutter build apk --debug --split-per-abi
+      - run: flutter build apk --release --split-per-abi
       - run: |
           flutter build ios --no-codesign
           cd build/ios/iphoneos
