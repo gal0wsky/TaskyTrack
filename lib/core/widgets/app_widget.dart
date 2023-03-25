@@ -5,9 +5,9 @@ import 'package:tasky_track/tasks/core/presentation/providers.dart';
 import '../../tasks/widgets/task_list_view.dart';
 
 final initializationProvider = FutureProvider<void>((ref) async {
-  final tasksProvider = ref.read(taskProvider.notifier);
-  // await tasksProvider.deleteTasksFromStorageAsync();
-  await tasksProvider.loadTasksFromStorageAsync();
+  final tasksList = ref.read(tasksProvider.notifier);
+  // await tasksList.deleteTasksFromStorageAsync();
+  await tasksList.loadTasksFromStorageAsync();
 });
 
 class AppWidget extends ConsumerWidget {
@@ -81,8 +81,8 @@ class AppWidget extends ConsumerWidget {
                         child: IconButton(
                           onPressed: () async {
                             final taskCreated = await ref
-                                .read(taskProvider.notifier)
-                                .addNewTask(taskName.name!);
+                                .read(tasksProvider.notifier)
+                                .addNewTask(title: taskName.name!);
                                               
                             if (!taskCreated) {
                               // ignore: use_build_context_synchronously

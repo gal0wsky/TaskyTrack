@@ -21,38 +21,41 @@ class TaskView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Color.fromARGB(255, 38, 187, 11),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Checkbox(
-                value: task.completed,
-                checkColor: const Color.fromARGB(255, 38, 187, 11),
-                activeColor: Colors.white,
-                side: MaterialStateBorderSide.resolveWith((states) =>
-                    const BorderSide(width: 2.0, color: Colors.white)),
-                onChanged: (_) {
-                  ref.read(taskProvider.notifier).changeTaskStatus(task);
-                  // TODO: task title is crossed
-                }),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  task.title,
-                  style: labelStyle,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            color: Color.fromARGB(255, 38, 187, 11),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                  value: task.completed,
+                  checkColor: const Color.fromARGB(255, 38, 187, 11),
+                  activeColor: Colors.white,
+                  side: MaterialStateBorderSide.resolveWith((states) =>
+                      const BorderSide(width: 2.0, color: Colors.white)),
+                  onChanged: (_) {
+                    ref.read(tasksProvider.notifier).changeTaskStatus(task: task);
+                    // TODO: task title is crossed
+                  }),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    task.title,
+                    style: labelStyle,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      )
-    ]);
+            ],
+          ),
+        )
+      ]
+    );
   }
 }
