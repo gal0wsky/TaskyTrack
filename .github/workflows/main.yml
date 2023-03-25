@@ -3,12 +3,10 @@ on:
     branches:
       - main
       - master
-      - releases
   push:
     branches:
       - main
       - master
-      - releases
 name: "Build & Release"
 jobs:
   build:
@@ -18,10 +16,11 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
         with:
-          java-version: '20.x'
+          java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.7.8'
+      - run: flutter clean
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk --debug --split-per-abi
