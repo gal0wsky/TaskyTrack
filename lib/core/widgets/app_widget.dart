@@ -74,6 +74,34 @@ class AppWidget extends ConsumerWidget {
                           onChanged: (newValue) {
                             ref.read(taskNameProvider.notifier).setTaskName(newValue);
                           },
+                          onEditingComplete: () async {
+                            final taskCreated = await ref
+                                .read(tasksProvider.notifier)
+                                .addNewTask(title: taskName.name!);
+                                              
+                            if (!taskCreated) {
+                              // ignore: use_build_context_synchronously
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                          title: const Text("Invalid title"),
+                                          content: const Text(
+                                              "Please enter valid task title"),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text("OK"),
+                                            ),
+                                          ]));
+                            } else {
+                              ref.read(taskNameProvider.notifier).clearTaskName();
+                              // ignore: use_build_context_synchronously
+                              FocusScope.of(context).unfocus();
+                              inputFormController.clear();
+                            }
+                          },
                         )
                       ),
                       Container(
