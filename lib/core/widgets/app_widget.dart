@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tasky_track/tasks/core/presentation/providers.dart';
 
+import '../../main.dart';
 import '../../tasks/widgets/task_list_view.dart';
 
 final initializationProvider = FutureProvider<void>((ref) async {
@@ -63,8 +64,8 @@ class AppWidget extends ConsumerWidget {
                           decoration: const InputDecoration(
                             labelText: "Task name",
                             labelStyle: TextStyle(color: Colors.grey),
-                            focusColor: Color.fromARGB(255, 38, 187, 11),
-                            hoverColor: Color.fromARGB(255, 38, 187, 11),
+                            focusColor: primaryColor,
+                            hoverColor: primaryColor,
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey,
@@ -138,7 +139,7 @@ class AppWidget extends ConsumerWidget {
                           icon: const Icon(
                             Icons.add_circle,
                             size: 45,
-                            color: Color.fromARGB(255, 38, 187, 11),
+                            color: primaryColor,
                           ),
                         ),
                       ),
