@@ -80,7 +80,7 @@ void main() {
 
       expect(result, true);
 
-      _tasks.reorganizeAfterDrag(oldIndex: 0, newIndex: 1);
+      _tasks.reorganizeAfterDrag(oldIndex: 0, newIndex: 2);
 
       expect(_tasks.state[0].title, task2.title);
       expect(_tasks.state[1].title, task1.title);

@@ -19,10 +19,13 @@ class TasksListView extends ConsumerWidget {
         return Dismissible(
           key: Key(tasks[index].title),
           child: TaskView(task: tasks[index]),
+          onDismissed: (direction) {
+            ref.read(tasksProvider.notifier).deleteTask(tasks[index]);
+          },
         );
       },
       onReorder: ((oldIndex, newIndex) {
-        ref.read(tasksProvider.notifier).reorganizeAfterDrag(oldIndex: oldIndex, newIndex: newIndex);
+        ref.read(tasksProvider.notifier).onTasksReorder(oldIndex: oldIndex, newIndex: newIndex);
       })
     );
   }

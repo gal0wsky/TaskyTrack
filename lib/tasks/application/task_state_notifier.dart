@@ -65,23 +65,38 @@ class TaskStateNotifier extends StateNotifier<List<TaskState>> {
     await saveTasksOnDeviceAsync();
   }
 
-  void reorganizeAfterDrag({required int oldIndex, required int newIndex}) {
-    final oldIndexItem = state[oldIndex];
-    final newIndexItem = state[newIndex];
+  void onTasksReorder({required int oldIndex, required int newIndex}) {
+    List<TaskState> newOrder = [
+      for (final task in state) task
+    ];
 
     if (newIndex > oldIndex) {
       newIndex--;
+
+      for (int i=oldIndex+1; i<=newIndex; i++) {
+        newOrder[i-1] = newOrder[i];
+      }
+    }
+    else if (newIndex < oldIndex) {
+      for (int i=oldIndex; i>newIndex; i--) {
+        newOrder[i] = newOrder[i-1];
+      }
     }
 
-    state = [
-      for (final task in state)
-        if (task.title == oldIndexItem.title)
-          newIndexItem
-        else if (task.title == newIndexItem.title)
-          oldIndexItem
-        else
-          task
-    ];
+    final oldIndexItem = state[oldIndex];
+    newOrder[newIndex] = oldIndexItem;
+
+    // state = [
+    //   for (final task in state)
+    //     if (task.title == oldIndexItem.title)
+    //       newIndexItem
+    //     else if (task.title == newIndexItem.title)
+    //       oldIndexItem
+    //     else
+    //       task
+    // ];
+
+    state = newOrder;
   }
 
   Future<void> saveTasksOnDeviceAsync() async {

@@ -13,10 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ProviderScope(
+    return ProviderScope(
       child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'TaskyTrack',
-        home: IntroductionPage(),
+        home: AppWidget(),
       ),
     );
   }
