@@ -17,15 +17,12 @@ class _IntroductionPageState extends State<IntroductionPage> {
     Get.to(AppWidget());
   }
 
-  Widget _buildBackgroundImage(String name, {double width = 350}) {
-    return Image.asset('assets/$name', width: width);
-  }
-
   @override
   Widget build(BuildContext context) {
     const pageDecoration = PageDecoration(
-      titlePadding: EdgeInsets.fromLTRB(16, 10, 16, 16),
-      pageColor: Colors.white,
+      titlePadding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+      // pageColor: Colors.white,
+      bodyPadding: EdgeInsets.zero,
       bodyAlignment: Alignment.bottomCenter,
       imagePadding: EdgeInsets.zero,
     );
@@ -73,46 +70,72 @@ class _IntroductionPageState extends State<IntroductionPage> {
             ),
             bodyPadding: EdgeInsets.symmetric(horizontal: 50)
           ),
-          // image: _buildBackgroundImage("intro1.png", width: MediaQuery.of(context).size.width),
         ),
         // Adding new task explained
         PageViewModel(
           title: "Adding new task",
           bodyWidget: Center(
             child: Column(
-              children: const [
-                Text("Name the task, then click + icon or just the Enter key to add the task")
+              children: [
+                const Text("Name the task, then click '+' icon or just the Enter key to add the task",
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  alignment: Alignment.center,
+                  child: Image.asset('assets/add-task.gif',
+                  ),
+                ),
               ],
             ),
           ),
           decoration: pageDecoration,
-          image: _buildBackgroundImage("intro1.png")
         ),
         // Dragging the task explained
         PageViewModel(
           title: "Dragging the task",
           bodyWidget: Center(
             child: Column(
-              children: const [
-                Text("Drag the tasks to priortize them how you like!")
+              children: [
+                const Text("Drag the tasks to priortize them how you like!",
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  alignment: Alignment.center,
+                  child: Image.asset('assets/reorder-tasks.gif',
+                  ),
+                ),
               ],
             ),
           ),
           decoration: pageDecoration,
-          image: _buildBackgroundImage("intro1.png")
         ),
         // Deleting the task explained
         PageViewModel(
           title: "Deleting the task",
           bodyWidget: Center(
             child: Column(
-              children: const [
-                Text("Swipe the task left or right to delete it.")
+              children: [
+                const Text("Swipe the task left or right to delete it.",
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  alignment: Alignment.center,
+                  child: Image.asset('assets/delete-task.gif',
+                  ),
+                ),
               ],
             ),
           ),
           decoration: pageDecoration,
-          image: _buildBackgroundImage("intro1.png")
         )
       ],
     );

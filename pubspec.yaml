@@ -14,7 +14,8 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   freezed_annotation: ^2.2.0
   get: ^4.6.5
-  hooks_riverpod: ^2.3.2
+  get_storage: ^2.1.1
+  hooks_riverpod: ^2.3.4
   introduction_screen: ^3.1.7
   material_design_icons_flutter: ^6.0.7096
   riverpod: ^2.3.2
@@ -34,3 +35,6 @@ flutter:
 
   assets:
     - assets/
+    - assets/add-task.gif
+    - assets/reorder-tasks.gif
+    - assets/delete-task.gif
